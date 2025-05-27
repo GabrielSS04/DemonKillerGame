@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm34f2x0avjul"]
+
+[ext_resource type="Texture2D" uid="uid://cvxxdql8e6mp7" path="res://sprites/lenha.png" id="1_t1mfn"]
+
+[sub_resource type="GDScript" id="GDScript_ep1w0"]
+script/source = "extends Area2D
+
+var can_interagir:bool
+var can_chop : bool = false
+
+@onready var player: CharacterBody2D = $\"../Player\"
+@onready var animation_player: AnimationPlayer = $\"../AnimationPlayer\"
+@onready var chop_wooding: AudioStreamPlayer2D = $\"../chop_wooding\"
+@onready var villarger: CharacterBody2D = $\"../villarger\"
+
+signal parar_player
+signal andar_player
+
+func _ready() -> void:
+	pass
+
+
+func _process(delta: float) -> void:
+	if can_interagir == true and can_chop == true and Input.is_action_just_pressed(\"chat\"):
+		print(\"tocou animação cortando madeira!!!\")
+		animation_player.play(\"chop_wood\")
+		Glob.if_chop_wood = true
+		chop_wooding.play()
+		can_chop = false
+		emit_signal(\"parar_player\")
+		Glob.time += 40
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == player:
+		can_interagir = true
+		print(\"entrou, pode cortar lenha!\")
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body == player:
+		can_interagir = false
+		print(\"saiu, não pode cortar lenha!\")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	emit_signal(\"andar_player\")
+	villarger.position.x = 1280
+	villarger.position.y = -890
+
+
+func _on_villarger_dialog_one() -> void:
+	can_chop = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv0hj"]
+size = Vector2(34, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bqjc"]
+radius = 42.0119
+
+[node name="tronco_lenha" type="Area2D"]
+script = SubResource("GDScript_ep1w0")
+
+[node name="colisao" type="CollisionShape2D" parent="."]
+position = Vector2(1, -12)
+shape = SubResource("RectangleShape2D_sv0hj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -16)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_t1mfn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="area_interagir" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_2bqjc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

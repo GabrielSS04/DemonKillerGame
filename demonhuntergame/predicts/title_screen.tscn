@@ -1,0 +1,396 @@
+[gd_scene load_steps=15 format=3 uid="uid://bqy8x0kj4xco5"]
+
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_lseor"]
+[ext_resource type="Texture2D" uid="uid://i7matx8dntn0" path="res://sprites/TitleScreen/bgArt.png" id="2_8j3n6"]
+[ext_resource type="Texture2D" uid="uid://daayjxglct2qk" path="res://sprites/TitleScreen/logo.png" id="2_xi061"]
+[ext_resource type="Theme" uid="uid://cttimnrjjsdbg" path="res://predicts/btn_theme.tres" id="3_y5not"]
+[ext_resource type="AudioStream" uid="uid://csex2bg2txe4a" path="res://predicts/loop-menu-preview-109594.mp3" id="5_tf8rd"]
+[ext_resource type="AudioStream" uid="uid://bsce8becabpq5" path="res://predicts/click-151673.mp3" id="6_uimqj"]
+[ext_resource type="AudioStream" uid="uid://dd185qu468acn" path="res://predicts/button-pressed-38129.mp3" id="7_4a1eu"]
+
+[sub_resource type="Animation" id="Animation_f7qcf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bg:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.929388, 0.935375, 0.937776, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(273, 377)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(110, -52)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bgConfig:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1500, 84)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1800, 339.5)]
+}
+
+[sub_resource type="Animation" id="Animation_5gwk2"]
+resource_name = "config_close"
+
+[sub_resource type="Animation" id="Animation_2boq4"]
+resource_name = "config_closing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-500, 377), Vector2(273, 377)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-600, -52), Vector2(110, -52)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bgConfig:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(350, 84), Vector2(1500, 84)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(680, 339.5), Vector2(1800, 339.5)]
+}
+
+[sub_resource type="Animation" id="Animation_srmld"]
+resource_name = "config_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(273, 377), Vector2(-500, 377)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(110, -52), Vector2(-600, -52)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bgConfig:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1500, 84), Vector2(350, 84)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1800, 339.5), Vector2(660, 339.5)]
+}
+
+[sub_resource type="Animation" id="Animation_8oji7"]
+resource_name = "reveal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bg:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.929388, 0.935375, 0.937776, 1), Color(0.929412, 0.937255, 0.937255, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkqb8"]
+_data = {
+"RESET": SubResource("Animation_f7qcf"),
+"config_close": SubResource("Animation_5gwk2"),
+"config_closing": SubResource("Animation_2boq4"),
+"config_open": SubResource("Animation_srmld"),
+"reveal": SubResource("Animation_8oji7")
+}
+
+[sub_resource type="Theme" id="Theme_bgm82"]
+default_font_size = 24
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lseor")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 1490.0
+offset_bottom = 768.0
+texture = ExtResource("2_8j3n6")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 110.0
+offset_top = -52.0
+offset_right = 1134.0
+offset_bottom = 972.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 8
+texture = ExtResource("2_xi061")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 377.0
+offset_right = 435.0
+offset_bottom = 624.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="start_btn" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_y5not")
+text = "Novo Jogo"
+
+[node name="load_btn" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_y5not")
+text = "Carregar Jogo"
+
+[node name="config_btn" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_y5not")
+text = "Configurações"
+
+[node name="end_btn" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_y5not")
+text = "Sair"
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mkqb8")
+}
+autoplay = "reveal"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1490.0
+offset_bottom = 768.0
+color = Color(0.929388, 0.935375, 0.937776, 1)
+
+[node name="bgConfig" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 755.0
+offset_top = -300.0
+offset_right = 1555.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.196078, 0.25098, 1)
+
+[node name="bgConfig" type="ColorRect" parent="bgConfig"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -290.0
+offset_right = 390.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.701961, 0.745098, 0.756863, 1)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1055.0
+offset_top = -44.5
+offset_right = 1278.0
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_bgm82")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Music Level: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+min_value = -80.0
+max_value = 20.0
+
+[node name="valorMusicLevep" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0
+"
+
+[node name="Button" type="Button" parent="HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Voltar"
+
+[node name="ambient_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tf8rd")
+autoplay = true
+parameters/looping = true
+
+[node name="sound_hover_button" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_uimqj")
+
+[node name="sound_click_button" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_4a1eu")
+
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/start_btn" to="." method="_on_start_btn_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/load_btn" to="." method="_on_load_btn_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/load_btn" to="." method="_on_load_btn_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/config_btn" to="." method="_on_config_btn_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/config_btn" to="." method="_on_config_btn_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/end_btn" to="." method="_on_end_btn_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/end_btn" to="." method="_on_end_btn_pressed"]
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
+[connection signal="value_changed" from="HBoxContainer2/VBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="mouse_entered" from="HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

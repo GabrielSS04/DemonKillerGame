@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bs3nyyo1wxxo1"
+path="res://.godot/imported/8-Bit Video Game Music - _8 Bit Adventure_ - Royalty Free.mp3-39342ffb4d25a9a83d0af9f6d6513b1d.mp3str"
+
+[deps]
+
+source_file="res://predicts/8-Bit Video Game Music - _8 Bit Adventure_ - Royalty Free.mp3"
+dest_files=["res://.godot/imported/8-Bit Video Game Music - _8 Bit Adventure_ - Royalty Free.mp3-39342ffb4d25a9a83d0af9f6d6513b1d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

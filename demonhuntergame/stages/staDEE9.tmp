@@ -1,0 +1,464 @@
+[gd_scene load_steps=32 format=3 uid="uid://cvfm7vod8x1e1"]
+
+[ext_resource type="PackedScene" uid="uid://b533wxxs0onjf" path="res://TileMaps/tile_map_manager.tscn" id="1_74ejo"]
+[ext_resource type="PackedScene" uid="uid://2n6cem8uxyl3" path="res://predicts/cut_scene.tscn" id="2_k6352"]
+[ext_resource type="PackedScene" uid="uid://c2bs67cjr0g0w" path="res://characters/player.tscn" id="2_mpynx"]
+[ext_resource type="Texture2D" uid="uid://dcivbdb4diwws" path="res://sprites/TileMap/SNES - Harvest Moon - Snow.png" id="3_1dwce"]
+[ext_resource type="Script" path="res://stages/menu_pause.gd" id="4_6u8ni"]
+[ext_resource type="PackedScene" uid="uid://dxsmsx8lplkpr" path="res://characters/villarger.tscn" id="5_3a45d"]
+[ext_resource type="AudioStream" uid="uid://bs3nyyo1wxxo1" path="res://predicts/8-Bit Video Game Music - _8 Bit Adventure_ - Royalty Free.mp3" id="6_x1vfc"]
+[ext_resource type="Script" path="res://stages/audio_stream_player_2d.gd" id="7_ru8dr"]
+
+[sub_resource type="GDScript" id="GDScript_m53ts"]
+script/source = "extends Node2D
+
+var is_menu_open: bool
+
+@onready var blur_menu: ColorRect = $\"menu_pause/blur-menu\"
+
+@onready var cooldown_timer: Timer = $cooldown_timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$cut_scene.play(\"cut_scene_01\")
+	set_process_input(true)
+	set_process(true)
+	is_menu_open = false
+	blur_menu.position.y = 768
+	cooldown_timer.one_shot = true  # Garante que o timer só dispare uma vez
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"menu\"):
+		if is_menu_open == false:
+			$menu_anim.play(\"menu_open\")
+		else:
+			$menu_anim.play(\"menu_close\")
+		
+
+func _on_menu_anim_animation_finished(anim_name: StringName) -> void:
+	if anim_name == \"menu_open\":
+		is_menu_open = true
+	
+	if anim_name == \"menu_close\":
+		is_menu_open = false
+"
+
+[sub_resource type="GDScript" id="GDScript_sw6jh"]
+script/source = "extends Camera2D
+
+@onready var player: CharacterBody2D = $\"../CharacterBody2D\"
+@onready var camera: Camera2D = $\".\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass 
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var target_pos = player.global_position + Vector2(0, 2)
+	global_position = lerp(global_position, target_pos, 5 * delta)
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fttr"]
+atlas = ExtResource("3_1dwce")
+region = Rect2(0, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npl2i"]
+atlas = ExtResource("3_1dwce")
+region = Rect2(0, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3wqw"]
+atlas = ExtResource("3_1dwce")
+region = Rect2(0, 1024, 256, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_018hg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fttr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npl2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3wqw")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmrxr"]
+size = Vector2(329, 553)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykn7e"]
+size = Vector2(596, 281)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ue2wv"]
+size = Vector2(219, 1194)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqcdj"]
+size = Vector2(529, 372)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x058v"]
+size = Vector2(696, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je7my"]
+size = Vector2(357, 816)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74scd"]
+size = Vector2(1187, 1017)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcegh"]
+size = Vector2(765, 698)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlf4i"]
+size = Vector2(1025, 1155)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6a20m"]
+size = Vector2(340, 1757)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1bj0"]
+size = Vector2(465, 1778)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22hai"]
+size = Vector2(468, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j4u7"]
+size = Vector2(2152, 432)
+
+[sub_resource type="Animation" id="Animation_1olsj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("menu_pause/blur-menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("menu_pause/menu-pause:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mbkso"]
+resource_name = "menu_close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("menu_pause/blur-menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("menu_pause/menu-pause:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 850)]
+}
+
+[sub_resource type="Animation" id="Animation_nwkdu"]
+resource_name = "menu_open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("menu_pause/blur-menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 768), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("menu_pause/menu-pause:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 850), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_str5y"]
+_data = {
+"RESET": SubResource("Animation_1olsj"),
+"menu_close": SubResource("Animation_mbkso"),
+"menu_open": SubResource("Animation_nwkdu")
+}
+
+[node name="Stage_01" type="Node2D"]
+script = SubResource("GDScript_m53ts")
+
+[node name="TileMapManager" parent="." instance=ExtResource("1_74ejo")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+texture_filter = 1
+position = Vector2(1461, -937)
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+script = SubResource("GDScript_sw6jh")
+
+[node name="snow_fall" type="CanvasLayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="snow_fall"]
+position = Vector2(-17, -128)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_018hg")
+animation = &"fall"
+autoplay = "fall"
+frame_progress = 0.125664
+centered = false
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="snow_fall"]
+position = Vector2(502, -119)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_018hg")
+animation = &"fall"
+autoplay = "fall"
+frame_progress = 0.970929
+centered = false
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="snow_fall"]
+position = Vector2(1002, -129)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_018hg")
+animation = &"fall"
+autoplay = "fall"
+frame_progress = 0.048713
+centered = false
+
+[node name="BordasCinema" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="ColorRect" parent="BordasCinema"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomBar" type="ColorRect" parent="BordasCinema"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="invisible_walls" type="Node2D" parent="."]
+
+[node name="invisible_wall" type="StaticBody2D" parent="invisible_walls"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="invisible_walls/invisible_wall"]
+position = Vector2(1065.5, -1157.5)
+shape = SubResource("RectangleShape2D_qmrxr")
+
+[node name="invisible_wall2" type="StaticBody2D" parent="invisible_walls"]
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall2"]
+position = Vector2(1529, -1293.5)
+shape = SubResource("RectangleShape2D_ykn7e")
+
+[node name="invisible_wall3" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall3"]
+position = Vector2(1485.5, -840)
+shape = SubResource("RectangleShape2D_ue2wv")
+
+[node name="invisible_wall4" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall4"]
+position = Vector2(1110.5, -441)
+shape = SubResource("RectangleShape2D_iqcdj")
+
+[node name="invisible_wall5" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall5"]
+position = Vector2(495, -375)
+shape = SubResource("RectangleShape2D_x058v")
+
+[node name="invisible_wall6" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall6"]
+position = Vector2(326.5, 153)
+shape = SubResource("RectangleShape2D_je7my")
+
+[node name="invisible_wall7" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall7"]
+position = Vector2(-447.5, 734.5)
+shape = SubResource("RectangleShape2D_74scd")
+
+[node name="invisible_wall8" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall8"]
+position = Vector2(101.5, -1088)
+shape = SubResource("RectangleShape2D_fcegh")
+
+[node name="invisible_wall9" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall9"]
+position = Vector2(-524.5, -505.5)
+shape = SubResource("RectangleShape2D_vlf4i")
+
+[node name="invisible_wall10" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall10"]
+position = Vector2(-1328, -206.5)
+shape = SubResource("RectangleShape2D_6a20m")
+
+[node name="invisible_wall11" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall11"]
+position = Vector2(-2197.5, -207)
+shape = SubResource("RectangleShape2D_f1bj0")
+
+[node name="invisible_wall12" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall12"]
+position = Vector2(-1735, -541)
+shape = SubResource("RectangleShape2D_22hai")
+
+[node name="invisible_wall13" type="StaticBody2D" parent="invisible_walls"]
+position = Vector2(451, 3)
+collision_layer = 2
+
+[node name="CollisionShape2D-wall 2" type="CollisionShape2D" parent="invisible_walls/invisible_wall13"]
+position = Vector2(-2121, 1020)
+shape = SubResource("RectangleShape2D_4j4u7")
+
+[node name="villarger" parent="." instance=ExtResource("5_3a45d")]
+position = Vector2(1511, -962)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_mpynx")]
+position = Vector2(1283, -778)
+collision_mask = 2
+
+[node name="menu_anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_str5y")
+}
+
+[node name="menu_pause" type="CanvasLayer" parent="."]
+
+[node name="blur-menu" type="ColorRect" parent="menu_pause"]
+offset_right = 1490.0
+offset_bottom = 768.0
+color = Color(0, 0, 0, 0.498039)
+
+[node name="menu-pause" type="Control" parent="menu_pause"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1490.0
+offset_bottom = 768.0
+script = ExtResource("4_6u8ni")
+
+[node name="MarginContainer" type="MarginContainer" parent="menu_pause/menu-pause"]
+layout_mode = 0
+offset_right = 1490.0
+offset_bottom = 768.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu_pause/menu-pause/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu_pause/menu-pause/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="voltar" type="Button" parent="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Voltar"
+
+[node name="config" type="Button" parent="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Configurações"
+
+[node name="salvar" type="Button" parent="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Salvar"
+
+[node name="sair" type="Button" parent="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sair"
+
+[node name="cut_scene" parent="." instance=ExtResource("2_k6352")]
+
+[node name="cooldown_timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_x1vfc")
+autoplay = true
+script = ExtResource("7_ru8dr")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[connection signal="animation_finished" from="menu_anim" to="." method="_on_menu_anim_animation_finished"]
+[connection signal="animation_finished" from="menu_anim" to="CharacterBody2D" method="_on_menu_anim_animation_finished"]
+[connection signal="pressed" from="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer/voltar" to="menu_pause/menu-pause" method="_on_voltar_pressed"]
+[connection signal="pressed" from="menu_pause/menu-pause/MarginContainer/HBoxContainer/VBoxContainer/sair" to="menu_pause/menu-pause" method="_on_sair_pressed"]

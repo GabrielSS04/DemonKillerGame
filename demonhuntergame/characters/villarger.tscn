@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxsmsx8lplkpr"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_ddn80"]
+[ext_resource type="Texture2D" uid="uid://73s6t8kmw5ow" path="res://sprites/Demons/Mage/Mage_.png" id="2_urwbf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4pi6"]
+atlas = ExtResource("2_urwbf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_igtk7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4pi6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuobh"]
+size = Vector2(24, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_biyfq"]
+size = Vector2(47, 51)
+
+[node name="villarger" type="CharacterBody2D" node_paths=PackedStringArray("hud")]
+script = ExtResource("1_ddn80")
+hud = NodePath("CanvasLayer")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -14)
+sprite_frames = SubResource("SpriteFrames_igtk7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -14)
+shape = SubResource("RectangleShape2D_xuobh")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="chat_colision" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, -14)
+shape = SubResource("RectangleShape2D_biyfq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

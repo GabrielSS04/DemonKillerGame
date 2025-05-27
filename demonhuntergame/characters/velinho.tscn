@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt2leqge4tn77"]
+
+[ext_resource type="Texture2D" uid="uid://73s6t8kmw5ow" path="res://sprites/Demons/Mage/Mage_.png" id="1_n3c3y"]
+
+[sub_resource type="GDScript" id="GDScript_pg30w"]
+script/source = "extends CharacterBody2D
+
+
+@onready var player: CharacterBody2D = $\"../Player\"
+@onready var animated_sprite_2d: Sprite2D = $sprite
+@onready var chat_colision: CollisionShape2D = $Area2D/interag_colision
+
+const dialog_scene : PackedScene = preload(\"res://predicts/dialog_screen.tscn\")
+var is_morning:bool = false
+
+var dialog_data : Dictionary = {
+	0: {\"title\": \"Ryoga\", \"dialog\": \"Droga, está ficando muito escuro nesta floresta!\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+	1: {\"title\": \"Velinho\", \"dialog\": \"Ei garoto, Porque você não dorme em minha casa hoje, está muito escuro já\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+	2: {\"title\": \"Ryoga\", \"dialog\": \"Muito obrigado senhor, vou aceitar sua oferta\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+}
+
+var dialog_data_2 : Dictionary = {
+	0: {\"title\": \"Ryoga\", \"dialog\": \"Obrigado senhor, se cuida!\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+	1: {\"title\": \"Velinho\", \"dialog\": \"Não à de quer meu garoto, venha sempre que quiser nós visitar!\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+	2: {\"title\": \"Ryoga\", \"dialog\": \"Melhor eu ir para casa rápido, a mamãe deve estar me esperando preocupada!\", \"image\": \"res://sprites/npcs/coal_buier.png\"},
+}
+
+@export_category(\"object\")
+@export var hud : CanvasLayer = null
+
+var can_chatting = false
+var chating = false
+var is_chat_count : bool = true
+
+signal dialog_started
+signal dialog_ended
+
+func _physics_process(delta: float) -> void:
+	pass
+
+
+func _on_dialog_ended() -> void:
+	chating = false
+	
+	emit_signal(\"conversou\") 
+	print(\"Diálogo finalizado, sinal 'conversou' emitido\")
+
+
+func _on_stage_01_conversa_velinho() -> void:
+	if is_morning == false and Glob.entregou_coal == true:
+		var new_dialog = dialog_scene.instantiate()
+		new_dialog.data = dialog_data
+		hud.add_child(new_dialog)
+		chating = true
+		emit_signal(\"dialog_started\")
+		new_dialog.connect(\"dialog_ended\", Callable(self, \"_on_dialog_ended\"))
+		is_morning = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3wxi"]
+
+[node name="velinho" type="CharacterBody2D" node_paths=PackedStringArray("hud")]
+script = SubResource("GDScript_pg30w")
+hud = NodePath("CanvasLayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_n3c3y")
+hframes = 19
+vframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -10)
+shape = SubResource("RectangleShape2D_m3wxi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
