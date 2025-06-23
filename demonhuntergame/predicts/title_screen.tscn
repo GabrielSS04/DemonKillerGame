@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bqy8x0kj4xco5"]
 
-[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_lseor"]
+[ext_resource type="Script" uid="uid://s1l2qf2tkij2" path="res://scripts/title_screen.gd" id="1_lseor"]
 [ext_resource type="Texture2D" uid="uid://i7matx8dntn0" path="res://sprites/TitleScreen/bgArt.png" id="2_8j3n6"]
 [ext_resource type="Texture2D" uid="uid://daayjxglct2qk" path="res://sprites/TitleScreen/logo.png" id="2_xi061"]
 [ext_resource type="Theme" uid="uid://cttimnrjjsdbg" path="res://predicts/btn_theme.tres" id="3_y5not"]
@@ -218,11 +218,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mkqb8"]
 _data = {
-"RESET": SubResource("Animation_f7qcf"),
-"config_close": SubResource("Animation_5gwk2"),
-"config_closing": SubResource("Animation_2boq4"),
-"config_open": SubResource("Animation_srmld"),
-"reveal": SubResource("Animation_8oji7")
+&"RESET": SubResource("Animation_f7qcf"),
+&"config_close": SubResource("Animation_5gwk2"),
+&"config_closing": SubResource("Animation_2boq4"),
+&"config_open": SubResource("Animation_srmld"),
+&"reveal": SubResource("Animation_8oji7")
 }
 
 [sub_resource type="Theme" id="Theme_bgm82"]
@@ -288,7 +288,7 @@ text = "Sair"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mkqb8")
+&"": SubResource("AnimationLibrary_mkqb8")
 }
 autoplay = "reveal"
 
@@ -339,7 +339,7 @@ anchor_bottom = 0.5
 offset_left = 1055.0
 offset_top = -44.5
 offset_right = 1278.0
-offset_bottom = 75.5
+offset_bottom = 77.5
 grow_horizontal = 2
 grow_vertical = 2
 

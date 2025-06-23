@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bv60gnuubd6f4"]
 
-[ext_resource type="Script" path="res://control.gd" id="1_0rvum"]
+[ext_resource type="Script" uid="uid://bjolp5ccfghlg" path="res://control.gd" id="1_0rvum"]
 [ext_resource type="Texture2D" uid="uid://bag8pnfs3xc36" path="res://sprites/TitleScreen/splatter.png" id="2_l7cgg"]
 
 [sub_resource type="Animation" id="Animation_p1b8h"]
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cmgec"]
 _data = {
-"RESET": SubResource("Animation_p1b8h"),
-"splash": SubResource("Animation_y1qlw")
+&"RESET": SubResource("Animation_p1b8h"),
+&"splash": SubResource("Animation_y1qlw")
 }
 
 [node name="SplashArt" type="Control"]

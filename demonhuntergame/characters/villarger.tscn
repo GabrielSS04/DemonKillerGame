@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dxsmsx8lplkpr"]
 
-[ext_resource type="Script" path="res://character_body_2d.gd" id="1_ddn80"]
+[ext_resource type="Script" uid="uid://8kultsh81kq4" path="res://character_body_2d.gd" id="1_ddn80"]
 [ext_resource type="Texture2D" uid="uid://73s6t8kmw5ow" path="res://sprites/Demons/Mage/Mage_.png" id="2_urwbf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4pi6"]

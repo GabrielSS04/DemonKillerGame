@@ -47,7 +47,7 @@ func _on_dialog_ended() -> void:
 
 
 func _on_stage_01_conversa_velinho() -> void:
-	if is_morning == false and Glob.entregou_coal == true:
+	if Glob.entregou_coal == true:
 		var new_dialog = dialog_scene.instantiate()
 		new_dialog.data = dialog_data
 		hud.add_child(new_dialog)
@@ -55,6 +55,16 @@ func _on_stage_01_conversa_velinho() -> void:
 		emit_signal(\"dialog_started\")
 		new_dialog.connect(\"dialog_ended\", Callable(self, \"_on_dialog_ended\"))
 		is_morning = true
+
+
+func _on_stage_01_conversa_velho_2() -> void:
+	var new_dialog = dialog_scene.instantiate()
+	new_dialog.data = dialog_data_2
+	hud.add_child(new_dialog)
+	chating = true
+	emit_signal(\"dialog_started\")
+	new_dialog.connect(\"dialog_ended\", Callable(self, \"_on_dialog_ended\"))
+	is_morning = true
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3wxi"]

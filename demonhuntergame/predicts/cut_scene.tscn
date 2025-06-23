@@ -145,9 +145,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f6qu1"]
 _data = {
-"RESET": SubResource("Animation_2042h"),
-"cut_scene_01": SubResource("Animation_uljfe"),
-"default": SubResource("Animation_0nk81")
+&"RESET": SubResource("Animation_2042h"),
+&"cut_scene_01": SubResource("Animation_uljfe"),
+&"default": SubResource("Animation_0nk81")
 }
 
 [node name="cut_scene" type="AnimationPlayer"]

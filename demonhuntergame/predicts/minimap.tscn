@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dt7yvlc104rlo"]
+
+[node name="SubViewport" type="SubViewport"]
+size = Vector2i(200, 200)
+
+[node name="map" type="Camera2D" parent="."]
